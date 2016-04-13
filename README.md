@@ -11,14 +11,16 @@
 3. Instatiate the class CoroutineWithData so you can access the result from the coroutine GET. Keep reading for more info. Make sure you use yield return.<br>
 4. You can use the customDeserializer, or you can create your own, or just parse the JSON into an IDictionary to get what you want.<br>
 See example:<br>
-<code>
+
+```c#
 public IEnumerator GetUserByName(string name) {
 	string url = "user.json?orderBy=\"username\"&equalTo=\"" + name +"\"";
 	Debug.Log("Url for user: " + url);
 	CoroutineWithData cd = new CoroutineWithData(this, myFirebase.GET(url));
 	yield return cd.coroutine;
 	UserVO user = customDeserializer.deserializeToUser(cd.result.ToString());
-	//Debug.Log ("User mail: " + user.email);
+	Debug.Log ("User mail: " + user.email);
 	yield return user;
 }
-</code>
+```
+
